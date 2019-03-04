@@ -5,7 +5,7 @@ header-img: img/post-bg-desk.jpg
 email: guojiayin1991@gmail.com
 description: "TODO"
 keyword: "TODO, Kodaira"
-url: "http://jyguo1729.github.io"          # your host, for absolute URL
+url: "http://jyguo1729.github.io/blog"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/jyguo1729/jyguo1729.github.io/blog.git" # you code repository
 github_theme_repo: "https://github.com/qiubaiying/qiubaiying.github.io.git"
