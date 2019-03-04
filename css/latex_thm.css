@@ -1,0 +1,19 @@
+
+.latex_thm, .latex_lem, .latex_cor, .latex_defn, .latex_prop, .latex_rem {
+    font-style:italic;
+    display: block;
+    margin:15px 0;
+}
+.latex_prob, .latex_examp, .latex_excs, .latex_proof {
+    font-style:normal;
+    margin: 10px 0;
+    display: block;
+}
+.latex_title {
+    float:left;
+    font-weight:bold;
+    padding-right: 10px;
+}
+.latex_proofend {
+    float:right;
+}
