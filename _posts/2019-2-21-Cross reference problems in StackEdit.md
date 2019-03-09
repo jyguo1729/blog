@@ -1,4 +1,15 @@
-﻿<h3 id="1-introduction">1. Introduction</h3>
+﻿---
+layout:     post
+title:      Cross reference problems in StackEdit
+subtitle:   Cross reference
+date:       2019-2-21
+author:     Jiayin Guo
+header-img: img/post-bg-universe.jpg
+catalog: true
+tags:
+    - Web Front-end
+---
+<h3 id="1-introduction">1. Introduction</h3>
 
 <p>In the previous post. We are left with some unsolved problems:</p>
 
@@ -172,7 +183,7 @@ And Benweet implement a cross reference style like<code>\ref{thm:1}</code>. </li
 <li>LaTex style theorem environment has to be treated as early as possible. The ideal situation is that it is implemented at <code>preConversion</code> stage. But in order the inner text of theorem can still utilize some Markdown syntax, say lists or hyperlinks. The earliest stage that it can be implemented is at <code>preBlockGamut()</code>.</li>
 </ul>
 
-<h3 id="48-my-adaption">48. My adaption</h3>
+<h3 id="4-my-adaption">4. My adaption</h3>
 
 <p>The purpose for me to make a adaption is that I want to have a more free cross reference style <code>\ref{ FTA}</code> rather than of a fixed format like <code>\ref{thm:index}</code>.  Then I need to solve the following problems. </p>
 
@@ -189,9 +200,11 @@ On <code>preCOnversion()</code> stage, for each theorem environment, I detect th
 
 <p>That’s it for this post. One may check code in the appendix.</p>
 
-<h3 id="49-appendix">49. Appendix</h3>
+<h3 id="5-appendix">5. Appendix</h3>
 
 <p>Add the following code in the UserCustom extension of <a href="https://stackedit.io/editor">StackEdit v4</a>. If this code does not work, check <a href="https://github.com/jyguo1729/blog/blob/master/_posts/final_code_for%20StackEdit_2019-3-2.js">GitHub</a> for the latest version.</p>
+
+
 
 <pre class="prettyprint"><code class=" hljs javascript">userCustom.onPagedownConfigure = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(editor)</span> {</span>
     <span class="hljs-keyword">var</span> thmCounter  = { num: <span class="hljs-number">0</span> };

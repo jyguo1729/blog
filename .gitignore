@@ -35,3 +35,6 @@ Temporary Items
 
 # debug file
 _site
+
+# Jiayin's modification to solve conflict with GithubPage and local host
+_config.yml

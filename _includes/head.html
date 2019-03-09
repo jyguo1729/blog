@@ -55,8 +55,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-        <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+        <!--script type="text/x-mathjax-config" src="{{ "/_includes/mathjax.js" | prepend: site.baseurl }}"> </script-->
+        
         <script type="text/x-mathjax-config">
          MathJax.Hub.Config({
            tex2jax: {
@@ -66,16 +66,96 @@
            }
          });
        </script>
-       <!--script type="text/x-mathjax-config">
+       <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           TeX: {
+            equationNumbers : {			autoNumber : "all"		},
             Macros: {
-              RR: "{\\bf R}",
-              pd:"{\\partial}"
+                pd:"{\\partial}",
+                bi:"{\\mathbb i}",
+                bC:"{\\mathbb C}",
+                bE:"{\\mathbb E}",
+                bF:"{\\mathbb F}",
+                bN:"{\\mathbb N}",
+                bP:"{\\mathbb P}",
+                bQ:"{\\mathbb Q}",
+                bR:"{\\mathbb R}",
+                bZ:"{\\mathbb Z}",
+                cA:"{\\mathcal A}",
+                cB:"{\\mathcal B}",
+                cC:"{\\mathcal C}",
+                cD:"{\\mathcal D}",
+                cE:"{\\mathcal E}",
+                cF:"{\\mathcal F}",
+                cM:"{\\mathcal M}",
+                cO:"{\\mathcal O}",
+                cP:"{\\mathcal P}",
+                cT:"{\\mathcal T}",
+                half:"{\\frac{1}{2}}",
+                cV:"{\\mathcal V}",
+                cW:"{\\mathcal W}",
+                bx:"{\\boldsymbol}",
+                ud:"{\\mathrm{d}}",
+                uD:"{\\mathrm{D}}",
+                fh:"{\\mathfrak{h}}",
+                fg:"{\\mathfrak{g}}",
+                ft:"{\\mathfrak{t}}",
+                fU:"{\\mathfrak{U}}",
+                sG:"{\\mathscr{G}}",
+                sA:"{\\mathscr{A}}",
+                sB:"{\\mathscr{B}}",
+                sC:"{\\mathscr{C}}",
+                sE:"{\\mathscr{E}}",
+                sH:"{\\mathscr{H}}",
+                sO:"{\\mathscr{O}}",
+                sM:"{\\mathscr{M}}",
+                sS:"{\\mathscr{S}}",
+                sU:"{\\mathscr{U}}",
+                rH:"{\\mathrm{H}}",
+                sR:"{\\mathscr{R}}",
+                sT:"{\\mathscr{T}}",
+                sD:"{\\mathscr{D}}",
+                loto:"{\\longrightarrow}",
+                lmto:"{\\longmapsto}",
+                gal:"{\\alpha}",
+                gbe:"{\\beta}",
+                gga:"{\\gamma}",
+                gde:"{\\delta}",
+                gep:"{\\epsilon}",
+                vp:"{\\varphi}",
+                pbs:"{\\bar\pd^*}",
+                pb:"{\\bar\pd}",
+                ad:"{\\mathop{\\rm ad}\\nolimits}",
+                Ad:"{\\mathop{\\rm Ad}\\nolimits}",
+                Aut:"{\\mathop{\\rm Aut}\\nolimits}",
+                End:"{\\mathop{\\rm End}\\nolimits}",
+                Ker:"{\\mathop{\\rm Ker}\\nolimits}",
+                Rank:"{\\mathop{\\rm Rank}\\nolimits}",
+                Coker:"{\\mathop{\\rm Coker}\\nolimits}",
+                im:"{\\mathop{\\rm im}\\nolimits}",
+                Tr:"{\\mathop{\\rm Tr}\\nolimits}",
+                D:"{\\mathop{\\rm D}\\nolimits}",
+                be:"{\\begin{equation}}",
+                ee:"{\\end{equation}}",
+                bes:"{\\begin{equation*}}",
+                ees:"{\\end{equation*}}",
+                bea:"{\\begin{eqnarray}}",
+                eea:"{\\end{eqnarray}}",
+                beas:"{\\begin{eqnarray*}}",
+                eeas:"{\\end{eqnarray*}}",
+                ben:"{\\begin{eqnarray*}}",
+                een:"{\\end{eqnarray*}}",
+                bst:"{\\begin{split}}",
+                est:"{\\end{split}}",
+                bp:"{\\begin{proof}}",
+                ep:"{\\end{proof}}",
+                bex:"{\\begin{exercise}}",
+                eex:"{\\end{exercise}}",
+                bz:"{\\bar z}"
             }
           }
         });
-       </script-->
+       </script>
        
        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
