@@ -1,15 +1,4 @@
-﻿---
-layout:     post
-title:      Cross reference problems in StackEdit
-subtitle:   Cross reference
-date:       2019-2-21
-author:     Jiayin Guo
-header-img: img/post-bg-universe.jpg
-catalog: true
-tags:
-    - Web Front-end
----
-<h3 id="1-introduction">1. Introduction</h3>
+﻿<h3 id="1-introduction">1. Introduction</h3>
 
 <p>In the previous post. We are left with some unsolved problems:</p>
 
@@ -183,7 +172,7 @@ And Benweet implement a cross reference style like<code>\ref{thm:1}</code>. </li
 <li>LaTex style theorem environment has to be treated as early as possible. The ideal situation is that it is implemented at <code>preConversion</code> stage. But in order the inner text of theorem can still utilize some Markdown syntax, say lists or hyperlinks. The earliest stage that it can be implemented is at <code>preBlockGamut()</code>.</li>
 </ul>
 
-<h3 id="4-my-adaption">4. My adaption</h3>
+<h3 id="48-my-adaption">48. My adaption</h3>
 
 <p>The purpose for me to make a adaption is that I want to have a more free cross reference style <code>\ref{ FTA}</code> rather than of a fixed format like <code>\ref{thm:index}</code>.  Then I need to solve the following problems. </p>
 
@@ -200,39 +189,47 @@ On <code>preCOnversion()</code> stage, for each theorem environment, I detect th
 
 <p>That’s it for this post. One may check code in the appendix.</p>
 
-<h3 id="5-appendix">5. Appendix</h3>
+<h3 id="49-appendix">49. Appendix</h3>
 
-<p>Add the following code in the UserCustom extension of <a href="https://stackedit.io/editor">StackEdit v4</a></p>
-
-
+<p>Add the following code in the UserCustom extension of <a href="https://stackedit.io/editor">StackEdit v4</a>. If this code does not work, check <a href="https://github.com/jyguo1729/blog/blob/master/_posts/final_code_for%20StackEdit_2019-3-2.js">GitHub</a> for the latest version.</p>
 
 <pre class="prettyprint"><code class=" hljs javascript">userCustom.onPagedownConfigure = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(editor)</span> {</span>
     <span class="hljs-keyword">var</span> thmCounter  = { num: <span class="hljs-number">0</span> };
     <span class="hljs-keyword">var</span> excsCounter = { num: <span class="hljs-number">0</span> };
+    <span class="hljs-keyword">var</span> secCounter = { num: <span class="hljs-number">0</span> };
+    <span class="hljs-keyword">var</span> subsecCounter = { num: <span class="hljs-number">0</span> };
+    <span class="hljs-keyword">var</span> subsubsecCounter = { num: <span class="hljs-number">0</span> };
     <span class="hljs-keyword">var</span> environmentMap = {
         thm:   { title: <span class="hljs-string">"Theorem"</span>    ,counter: thmCounter  },
         lem:   { title: <span class="hljs-string">"Lemma"</span>      ,counter: thmCounter  },
         cor:   { title: <span class="hljs-string">"Corollary"</span>  ,counter: thmCounter  },
-        prop:  { title: <span class="hljs-string">"Property"</span>   ,counter: thmCounter  },
-        defn:  { title: <span class="hljs-string">"Definition"</span> ,counter: thmCounter  },
-        rem:   { title: <span class="hljs-string">"Remark"</span>     ,counter: thmCounter  },
+        prop:  { title: <span class="hljs-string">"Propersition"</span>,counter: thmCounter  },
+        def:  { title: <span class="hljs-string">"Definition"</span> ,counter: thmCounter  },
+        rk:   { title: <span class="hljs-string">"Remark"</span>     ,counter: thmCounter  },
         prob:  { title: <span class="hljs-string">"Problem"</span>    ,counter: excsCounter },
-        excs:  { title: <span class="hljs-string">"Exercise"</span>   ,counter: excsCounter },
-        examp: { title: <span class="hljs-string">"Example"</span>    ,counter: excsCounter },
-        proof: { title: <span class="hljs-string">"Proof"</span> }
+        ex:  { title: <span class="hljs-string">"Exercise"</span>   ,counter: excsCounter },
+        eg: { title: <span class="hljs-string">"Example"</span>    ,counter: thmCounter },
+        pf: { title: <span class="hljs-string">"Proof"</span> }
     };
     <span class="hljs-keyword">var</span> labelMap={};
     <span class="hljs-keyword">var</span> converter = editor.getConverter();
     <span class="hljs-comment">// Save the preConversion callbacks stack</span>
     <span class="hljs-keyword">var</span> preConversion = converter.hooks.preConversion;
-    converter.hooks.chain(<span class="hljs-string">"preConversion"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(text)</span> {</span>        
+    converter.hooks.chain(<span class="hljs-string">"preConversion"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(text)</span> {</span>
+
+
         <span class="hljs-comment">// Change \begin...\end to /begin.../end to avoid MathJax processing</span>
         <span class="hljs-keyword">var</span> re=<span class="hljs-regexp">/\\\\begin{(\w+)}([\s\S]*?)\\\\end{\1}/g</span>;
-        <span class="hljs-keyword">var</span> labelre=<span class="hljs-regexp">/\\\\begin{(\w+)}([\s\S]*?)\\\\label{(\w+)}([\s\S]*?)\\\\end{\1}/g</span>;
-        text=text.replace(labelre, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1, m2 ,m3 ,m4)</span> {</span>
-            labelMap[m3]=m1;
-
-          <span class="hljs-keyword">return</span> <span class="hljs-string">'######   {#'</span>+m3+<span class="hljs-string">'}'</span>+<span class="hljs-string">'\n'</span>+<span class="hljs-string">'\\\\begin{'</span> + m1 + <span class="hljs-string">'}'</span> + m2 +<span class="hljs-string">'/label{'</span>+m3+<span class="hljs-string">'}'</span>+m4+<span class="hljs-string">'\\\\end{'</span> + m1 + <span class="hljs-string">'}'</span>;
+        <span class="hljs-keyword">var</span> labelre=<span class="hljs-regexp">/([\s\S]*?)\\\\label{(\w+)}([\s\S]*?)/</span>;
+        text=text.replace(re, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1, m2)</span> {</span>
+          label=m2.match(labelre)
+          <span class="hljs-keyword">if</span> (! label) <span class="hljs-keyword">return</span> wholeMatch;
+          labelMap[label]=m1;
+          m2=m2.replace(labelre,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(wholeMatch,p1,p2,p3)</span>{</span>
+            <span class="hljs-keyword">return</span> p1+<span class="hljs-string">'/label{'</span>+p2+<span class="hljs-string">'}'</span>+p3;
+          });
+          console.log(label)
+          <span class="hljs-keyword">return</span> <span class="hljs-string">'######   {#'</span>+label[<span class="hljs-number">2</span>]+<span class="hljs-string">'}'</span>+<span class="hljs-string">'\n'</span>+<span class="hljs-string">'\\\\begin{'</span> + m1 + <span class="hljs-string">'}'</span> + m2 +<span class="hljs-string">'\\\\end{'</span> + m1 + <span class="hljs-string">'}'</span>;
         });
 
         text = text.replace(re, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1, m2)</span> {</span>
@@ -246,16 +243,19 @@ On <code>preCOnversion()</code> stage, for each theorem environment, I detect th
         text = text.replace(<span class="hljs-regexp">/\\(\w+){([^\r\n}]+)}/g</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1, m2)</span> {</span>
             <span class="hljs-comment">// At this stage we need to keep the same number of characters for accurate section parsing</span>
             <span class="hljs-keyword">if</span> (m1 == <span class="hljs-string">'section'</span>) {
+                secCounter[<span class="hljs-string">'num'</span>]+=<span class="hljs-number">1</span>;
                 <span class="hljs-comment">// \section{} has to be replaced by 10 chars</span>
-                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n###     '</span> + m2 + <span class="hljs-string">'\n'</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n###     '</span> +secCounter[<span class="hljs-string">'num'</span>].toString()+<span class="hljs-string">'. '</span>+ m2 + <span class="hljs-string">'\n'</span>;<span class="hljs-comment">//secCounter</span>
             }
             <span class="hljs-keyword">if</span> (m1 == <span class="hljs-string">'subsection'</span>) {
+                subsecCounter[<span class="hljs-string">'num'</span>]+=<span class="hljs-number">1</span>;
                 <span class="hljs-comment">// \subsection{} has to be replaced by 13 chars</span>
-                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n####       '</span> + m2 + <span class="hljs-string">'\n'</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n####       '</span> +subsecCounter[<span class="hljs-string">'num'</span>].toString()+<span class="hljs-string">'. '</span>+ m2 + <span class="hljs-string">'\n'</span>;
             }
             <span class="hljs-keyword">if</span> (m1 == <span class="hljs-string">'subsubsection'</span>) {
+                subsubsecCounter[<span class="hljs-string">'num'</span>]+=<span class="hljs-number">1</span>;
                 <span class="hljs-comment">// \subsubsection{} has to be replaced by 16 chars</span>
-                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n#####         '</span> + m2 + <span class="hljs-string">'\n'</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-string">'\n#####         '</span> +subsubsecCounter[<span class="hljs-string">'num'</span>].toString()+<span class="hljs-string">'. '</span>+ m2 + <span class="hljs-string">'\n'</span>;
             }
             <span class="hljs-keyword">if</span> (m1 == <span class="hljs-string">'title'</span>) {
                 <span class="hljs-comment">// \title{} has to be replaced by 8 chars</span>
@@ -270,7 +270,7 @@ On <code>preCOnversion()</code> stage, for each theorem environment, I detect th
     });
     converter.hooks.chain(<span class="hljs-string">"preBlockGamut"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(text, blockGamutHookCallback)</span> {</span>
 
-        text = text.replace(<span class="hljs-regexp">/\\ref{(\S+)}/g</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1)</span> {</span>
+        text = text.replace(<span class="hljs-regexp">/\\ref{(\w+)}/g</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(wholeMatch, m1)</span> {</span>
 
             <span class="hljs-keyword">return</span> <span class="hljs-string">'&lt;a class="latex_ref" href=""&gt;'</span> + m1 + <span class="hljs-string">'&lt;/a&gt;'</span>;
         });
@@ -328,8 +328,10 @@ On <code>preCOnversion()</code> stage, for each theorem environment, I detect th
             <span class="hljs-comment">//href="#' + m1 + ':' + m2 + '"&gt;'</span>
             elt.innerHTML=label.name+<span class="hljs-string">' '</span>+label.num;
         });
+
     });
 };
+
 userCustom.onReady = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
     <span class="hljs-keyword">var</span> style = [
         <span class="hljs-string">'.latex_thm, .latex_lem, .latex_cor, .latex_defn, .latex_prop, .latex_rem {'</span>,
