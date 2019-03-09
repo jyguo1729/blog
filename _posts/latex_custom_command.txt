@@ -1,0 +1,81 @@
+\newcommand{\pd}{\partial}
+\newcommand{\bi}{\mathbb i}
+\newcommand{\bC}{\mathbb C}
+\newcommand{\bE}{\mathbb E}
+\newcommand{\bF}{\mathbb F}
+\newcommand{\bN}{\mathbb N}
+\newcommand{\bP}{\mathbb P}
+\newcommand{\bQ}{\mathbb Q}
+\newcommand{\bR}{\mathbb R}
+\newcommand{\bZ}{\mathbb Z}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\cV}{\mathcal V}
+\newcommand{\cW}{\mathcal W}
+\newcommand{\bx}{\boldsymbol}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\uD}{\mathrm{D}}
+\newcommand{\fh}{\mathfrak{h}}
+\newcommand{\fg}{\mathfrak{g}}
+\newcommand{\ft}{\mathfrak{t}}
+\newcommand{\fU}{\mathfrak{U}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\rH}{\mathrm{H}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\loto}{\longrightarrow}
+\newcommand{\lmto}{\longmapsto}
+\newcommand{\gal}{\alpha}
+\newcommand{\gbe}{\beta}
+\newcommand{\gga}{\gamma}
+\newcommand{\gde}{\delta}
+\newcommand{\gep}{\epsilon}
+\newcommand{\vp}{\varphi}
+\newcommand{\pbs}{\bar\pd^*}
+\newcommand{\pb}{\bar\pd}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\D}{D}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\beas}{\begin{eqnarray*}}
+\newcommand{\eeas}{\end{eqnarray*}}
+\newcommand{\ben}{\begin{eqnarray*}}
+\newcommand{\een}{\end{eqnarray*}}
+\newcommand{\bst}{\begin{split}}
+\newcommand{\est}{\end{split}}
+\newcommand{\bp}{\begin{proof}}
+\newcommand{\ep}{\end{proof}}
+\newcommand{\bex}{\begin{exercise}}
+\newcommand{\eex}{\end{exercise}}
+\newcommand{\bz}{\bar z}

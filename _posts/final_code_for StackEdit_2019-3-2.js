@@ -2,17 +2,19 @@ userCustom.onPagedownConfigure = function (editor) {
     var thmCounter  = { num: 0 };
     var excsCounter = { num: 0 };
     var secCounter = { num: 0 };
+    var subsecCounter = { num: 0 };
+    var subsubsecCounter = { num: 0 };
     var environmentMap = {
         thm:   { title: "Theorem"    ,counter: thmCounter  },
         lem:   { title: "Lemma"      ,counter: thmCounter  },
         cor:   { title: "Corollary"  ,counter: thmCounter  },
-        prop:  { title: "Property"   ,counter: thmCounter  },
-        defn:  { title: "Definition" ,counter: thmCounter  },
-        rem:   { title: "Remark"     ,counter: thmCounter  },
+        prop:  { title: "Propersition",counter: thmCounter  },
+        def:  { title: "Definition" ,counter: thmCounter  },
+        rk:   { title: "Remark"     ,counter: thmCounter  },
         prob:  { title: "Problem"    ,counter: excsCounter },
-        excs:  { title: "Exercise"   ,counter: excsCounter },
-        examp: { title: "Example"    ,counter: excsCounter },
-        proof: { title: "Proof" }
+        ex:  { title: "Exercise"   ,counter: excsCounter },
+        eg: { title: "Example"    ,counter: thmCounter },
+        pf: { title: "Proof" }
     };
     var labelMap={};
     var converter = editor.getConverter();
@@ -46,12 +48,14 @@ userCustom.onPagedownConfigure = function (editor) {
                 return '\n###     ' +secCounter['num'].toString()+'. '+ m2 + '\n';//secCounter
             }
             if (m1 == 'subsection') {
+                subsecCounter['num']+=1;
                 // \subsection{} has to be replaced by 13 chars
-                return '\n####       ' + m2 + '\n';
+                return '\n####       ' +subsecCounter['num'].toString()+'. '+ m2 + '\n';
             }
             if (m1 == 'subsubsection') {
+                subsubsecCounter['num']+=1;
                 // \subsubsection{} has to be replaced by 16 chars
-                return '\n#####         ' + m2 + '\n';
+                return '\n#####         ' +subsubsecCounter['num'].toString()+'. '+ m2 + '\n';
             }
             if (m1 == 'title') {
                 // \title{} has to be replaced by 8 chars
