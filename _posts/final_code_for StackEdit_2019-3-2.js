@@ -25,11 +25,16 @@ userCustom.onPagedownConfigure = function (editor) {
         
         // Change \begin...\end to /begin.../end to avoid MathJax processing
         var re=/\\\\begin{(\w+)}([\s\S]*?)\\\\end{\1}/g;
-        var labelre=/\\\\begin{(\w+)}([\s\S]*?)\\\\label{(\w+)}([\s\S]*?)\\\\end{\1}/g;
-        text=text.replace(labelre, function (wholeMatch, m1, m2 ,m3 ,m4) {
-            labelMap[m3]=m1;
-
-          return '######   {#'+m3+'}'+'\n'+'\\\\begin{' + m1 + '}' + m2 +'/label{'+m3+'}'+m4+'\\\\end{' + m1 + '}';
+        var labelre=/([\s\S]*?)\\\\label{(\w+)}([\s\S]*?)/;
+        text=text.replace(re, function (wholeMatch, m1, m2) {
+          label=m2.match(labelre)
+          if (! label) return wholeMatch;
+          labelMap[label]=m1;
+          m2=m2.replace(labelre,function(wholeMatch,p1,p2,p3){
+            return p1+'/label{'+p2+'}'+p3;
+          });
+          console.log(label)
+          return '######   {#'+label[2]+'}'+'\n'+'\\\\begin{' + m1 + '}' + m2 +'\\\\end{' + m1 + '}';
         });
 
         text = text.replace(re, function (wholeMatch, m1, m2) {

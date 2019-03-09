@@ -64,12 +64,10 @@ we have the following naive deterministic algorithm. </p>
 
 <p>In fact, the first <script type="math/tex" id="MathJax-Element-22">n</script> comes from the times of loops. To do the modular exponential <script type="math/tex" id="MathJax-Element-23">a^{n-1} \mod n</script>. One may apply <a href="https://simple.wikipedia.org/wiki/Exponentiation_by_squaring">exponentiating by squaring algorithm</a> to reduce the task to compute product of two number less than <script type="math/tex" id="MathJax-Element-24">n</script>, this gives us a factor <script type="math/tex" id="MathJax-Element-25">\log n</script>. The product of two numbers with digits less than <script type="math/tex" id="MathJax-Element-26">\log n</script> can be treated by  <a href="https://en.wikipedia.org/wiki/Montgomery_modular_multiplication">Montgomery modular multiplication</a> with time complexity <script type="math/tex" id="MathJax-Element-27">\tilde\sO(\log n)</script>. So the time complexity of the loop body is <script type="math/tex" id="MathJax-Element-28">\tilde\sO(\log^2 n)</script>.</p>
 
-<p>The first factor <script type="math/tex" id="MathJax-Element-29">n</script> gives a lot restriction to the time complexity and Fermat primality test an actual exponential time algorithm relative to <script type="math/tex" id="MathJax-Element-30">\log n</script>. <br>
- ######   {#mr}</p>
+<p>The first factor <script type="math/tex" id="MathJax-Element-29">n</script> gives a lot restriction to the time complexity and Fermat primality test an actual exponential time algorithm relative to <script type="math/tex" id="MathJax-Element-30">\log n</script>.</p>
 
-<div class="latex_rk" id="rk:4"><span class="latex_title">Remark 4.</span><span class="latex_label"></span><p>One may attempt to modify the Fermat’s primality test algorithm to be a probabilistic one selecting different numbers in <script type="math/tex" id="MathJax-Element-31">\{1,..,,n-1\}</script> randomly for k times. This algorithm has time complexity <script type="math/tex" id="MathJax-Element-32">\tilde\sO(k\cdot\log^2 n)</script>. </p></div>
-
-<p>Let <script type="math/tex" id="MathJax-Element-33">N_F=\{\textrm{Fermat non-Witness of } n\}</script>. Let C be event that <script type="math/tex" id="MathJax-Element-34">n</script> is a composite, <script type="math/tex" id="MathJax-Element-35">T_k</script> be event that after the output running the “probabilistic” Fermat’s primality test is <code>True</code>, then <script type="math/tex; mode=display" id="MathJax-Element-36">P(T_k|C)\leq(\frac{|N_F|}n)^k.</script>Since <script type="math/tex" id="MathJax-Element-37">n</script> can be Carmelson number, the upper bound of <script type="math/tex" id="MathJax-Element-38">P(T_k|C)</script> can be 1. Hence this algorithm will is not probabilistic.</p>
+<p></p><div class="latex_rk" id="rk:4"><span class="latex_title">Remark 4.</span><span class="latex_label"></span><p>One may attempt to modify the Fermat’s primality test algorithm to be a probabilistic one selecting different numbers in <script type="math/tex" id="MathJax-Element-31">\{1,..,,n-1\}</script> randomly for k times. This algorithm has time complexity <script type="math/tex" id="MathJax-Element-32">\tilde\sO(k\cdot\log^2 n)</script>. </p></div> <br>
+Let <script type="math/tex" id="MathJax-Element-33">N_F=\{\textrm{Fermat non-Witness of } n\}</script>. Let C be event that <script type="math/tex" id="MathJax-Element-34">n</script> is a composite, <script type="math/tex" id="MathJax-Element-35">T_k</script> be event that after the output running the “probabilistic” Fermat’s primality test is <code>True</code>, then <script type="math/tex; mode=display" id="MathJax-Element-36">P(T_k|C)\leq(\frac{|N_F|}n)^k.</script>Since <script type="math/tex" id="MathJax-Element-37">n</script> can be Carmelson number, the upper bound of <script type="math/tex" id="MathJax-Element-38">P(T_k|C)</script> can be 1. Hence this algorithm will is not probabilistic.<p></p>
 
 <h4 id="2-miller-rabin-primality-test">2.  Miller-Rabin  primality test</h4>
 
@@ -81,8 +79,11 @@ we have the following naive deterministic algorithm. </p>
 
 <p>Based on this we have the following proposition for prime numbers.</p>
 
-<div class="latex_prop" id="prop:6"><span class="latex_title">Propersition 6.</span><span class="latex_label"></span><p>Let p be a prime number, <script type="math/tex" id="MathJax-Element-45">a\in  (\bZ/ n \bZ)^* </script>.  Suppose <script type="math/tex" id="MathJax-Element-46">p-1=s\cdot2^t</script>, where <script type="math/tex" id="MathJax-Element-47">s</script> is an odd number, t is an integer. Then <br>
-<script type="math/tex; mode=display" id="MathJax-Element-48">\begin{equation}
+<h6 id="mr"> </h6>
+
+<div class="latex_prop" id="prop:6"><span class="latex_title">Propersition 6.</span><span class="latex_label"></span><p>Let p be a prime number, <script type="math/tex" id="MathJax-Element-45">a\in  (\bZ/ n \bZ)^* </script>.  Suppose <script type="math/tex" id="MathJax-Element-46">p-1=s\cdot2^t</script>, where <script type="math/tex" id="MathJax-Element-47">s</script> is an odd number, t is an integer. Then</p>
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-48">\begin{equation}
 \begin{split}
 &a^s=\pm1\textrm{  or}  \\ 
 &a^{s2^k}=-1 \textrm{  for some }k\in\{1,\dots,t-1 \} 
@@ -168,7 +169,7 @@ By the Bayes formula, for a <script type="math/tex" id="MathJax-Element-86">m</s
 
 
 
-<p><script type="math/tex; mode=display" id="MathJax-Element-89">
+<p><script type="math/tex; mode=display" id="MathJax-Element-102">
 \begin{equation}
 \begin{split}
 	P(P|T_k)&=\frac{P(T_k|P)P(P)}{P(T_k|P)P(P)+P(T_k|C)P(C)}\\
@@ -180,28 +181,24 @@ By the Bayes formula, for a <script type="math/tex" id="MathJax-Element-86">m</s
 \end{equation}
 </script></p>
 
-<p>The last inequality  require <script type="math/tex" id="MathJax-Element-90">k>\log m</script>, the second last inequality used the theorem above. </p>
+<p>The last inequality  require <script type="math/tex" id="MathJax-Element-103">k>\log m</script>, the second last inequality used the theorem above. </p>
 
-<p>Though the Miller-Rabin primality probabilistic algorithm can not be used for determine a number being prime theoretically. As noted <a href="https://stackoverflow.com/questions/4159333/rsa-and-prime-generator-algorithms/4160517#4160517">here</a> , the probability for a CPU has one error has a lower bound <script type="math/tex" id="MathJax-Element-91">1.8*10^{-24}</script>. So one may choose <script type="math/tex" id="MathJax-Element-92">k\geq43\log \log n</script> to guarantee the precision of the algorithm is suitable for practical use. </p>
+<p>Though the Miller-Rabin primality probabilistic algorithm can not be used for determine a number being prime theoretically. As noted <a href="https://stackoverflow.com/questions/4159333/rsa-and-prime-generator-algorithms/4160517#4160517">here</a> , the probability for a CPU has one error has a lower bound <script type="math/tex" id="MathJax-Element-104">1.8*10^{-24}</script>. So one may choose <script type="math/tex" id="MathJax-Element-105">k\geq43\log \log n</script> to guarantee the precision of the algorithm is suitable for practical use. </p>
 
+<div class="latex_rk" id="rk:11"><span class="latex_title">Remark 11.</span><span class="latex_label"></span><p>It was show here that admitting the generalized Riemann hypothesis,  if <script type="math/tex" id="MathJax-Element-142">a</script> is a Miller-Rabin witness of <script type="math/tex" id="MathJax-Element-143">n</script>, then <script type="math/tex" id="MathJax-Element-144">1\leq a\leq 2\log^2 n</script>. This leads to a deterministic Miller-Rabin primality algorithm with polynomial time complexity <script type="math/tex" id="MathJax-Element-145">\tilde\sO(\log^4 n)</script>， which can be used to verify primality in theory.</p></div>
 
+<h3 id="8-python-implementation-of-miller-rabin-primality-test">8.  Python implementation of Miller-Rabin primality test</h3>
 
-<div class="latex_rk" id="rk:11"><span class="latex_title">Remark 11.</span><span class="latex_label"></span><p>It was show here that admitting the generalized Riemann hypothesis,  if <script type="math/tex" id="MathJax-Element-93">a</script> is a Miller-Rabin witness of <script type="math/tex" id="MathJax-Element-94">n</script>, then <script type="math/tex" id="MathJax-Element-95">1\leq a\leq 2\log^2 n</script>. This leads to a deterministic Miller-Rabin primality algorithm with polynomial time complexity <script type="math/tex" id="MathJax-Element-96">\tilde\sO(\log^4 n)</script>， which can be used to verify primality in theory.</p></div>
-
-<h3 id="3-python-implementation-of-miller-rabin-primality-test">3.  Python implementation of Miller-Rabin primality test</h3>
-
-<p>In the implementation of the  algorithm, I customized a <a href="">unit test module</a>  to verify my coding. Generally it will verify if each function in the algorithm will run correctly by testing their result on some customized data. </p>
+<p>In the implementation of the  algorithm, I customized a <a href="https://github.com/jyguo1729/Cipher/blob/master/test.py">unit test module</a>  to verify my coding. Generally it will verify if each function in the algorithm will run correctly by testing their result on some customized data. </p>
 
 <p>We use the python code at the end of this section to implement the Miller Rabin test. <br>
 During the process of coding, it worth to note that the following code <br>
 <code>u=pow(a,s,n)</code> instead of <code>u=a**s%n</code> give the improvement of  running speed. <br>
 For the algorithm using <code>u=a**s%n</code> it took 0.001s to get a 19 bits prime. For algorithm using <code>u=pow(a,s,n)</code>  it took 4s to get a 19 bits prime.  </p>
 
-<p>This is because though <code>a**s</code> is implemented in python with <script type="math/tex" id="MathJax-Element-97">\sO(\log s)</script> times multiplication but the digit of <script type="math/tex" id="MathJax-Element-98">a</script> increase to <script type="math/tex" id="MathJax-Element-99">\log^2 n</script> digits, which has time complexity <script type="math/tex" id="MathJax-Element-100">\tilde\sO(\log^2 n)</script> with FFT. <code>pow(a,s,n)</code> is implemented with a combination of Montgomery modular multiplication and exponential by square and has a prefered time complexity <script type="math/tex" id="MathJax-Element-101">\tilde\sO(\log n)</script>.</p>
+<p>This is because though <code>a**s</code> is implemented in python with <script type="math/tex" id="MathJax-Element-146">\sO(\log s)</script> times multiplication but the digit of <script type="math/tex" id="MathJax-Element-147">a</script> increase to <script type="math/tex" id="MathJax-Element-148">\log^2 n</script> digits, which has time complexity <script type="math/tex" id="MathJax-Element-149">\tilde\sO(\log^2 n)</script> with FFT. <code>pow(a,s,n)</code> is implemented with a combination of Montgomery modular multiplication and exponential by square and has a prefered time complexity <script type="math/tex" id="MathJax-Element-150">\tilde\sO(\log n)</script>.</p>
 
-<p>It tooks 1.3s for <code>generate_prime()</code> to get a prime of 1024 bits and 27s for <code>generate_prime()</code> to get a prime of 2048 bits.</p>
-
-
+<p>It tooks 1.3 seconds for <code>generate_prime()</code> to get a prime of 1024 bits and 27 seconds for <code>generate_prime()</code> to get a prime of 2048 bits.</p>
 
 <pre class="prettyprint"><code class=" hljs python">
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randrange,getrandbits
